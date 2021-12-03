@@ -117,16 +117,16 @@ class Buku extends CI_Controller
         $this->ModelBuku->hapusKategori($where);
         redirect('buku/kategori');
     }
-    // public function ubahBuku($id_buku)
-    // {
-    // $data['judul']  = 'Ubah Data Buku';
-    // $data['user']   = $this->ModelUser->cekData(['email' => $this->session->userdata('email')])->row_array();
-    // $data['buku']   = $this->ModelBuku->bukuWhere(['id' => $id_buku])->result_array();
-    // $kategori = $this->ModelBuku->joinKategoriBuku(['buku.id' => $id_buku])->result_array();
-    // foreach ($kategori as $k) {
-    //     $data['id'] = $k['id_kategori'];
-    //     $data['k']  = $k['kategori'];
-    // }
+    public function ubahBuku($id_buku)
+    {
+        $data['judul']  = 'Ubah Data Buku';
+        $data['user']   = $this->ModelUser->cekData(['email' => $this->session->userdata('email')])->row_array();
+        $data['buku']   = $this->ModelBuku->bukuWhere(['id' => $id_buku])->result_array();
+        $kategori = $this->ModelBuku->joinKategoriBuku(['buku.id' => $id_buku])->result_array();
+        foreach ($kategori as $k) {
+            $data['id'] = $k['id_kategori'];
+            $data['k']  = $k['kategori'];
+    }
     // $data['kategori'] = $this->ModelBuku->getKategori()->result_array();
     // $this->form_validation->set_rules('judul_buku', 'Judul Buku', 'required|min_length[3]', [
     //     'required' => 'Judul Buku harus diisi','min_length' => 'Judul buku terlalu pendek'
@@ -192,7 +192,7 @@ class Buku extends CI_Controller
     //     $this->ModelBuku->updateBuku($data, ['id' => $this->input->post('id')]);
     //     redirect('buku');
     // }
-    // }
+    }
     public function hapusBuku()
     {
         $where = ['id' => $this->uri->segment(3)];
